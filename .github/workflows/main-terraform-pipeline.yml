@@ -2,24 +2,26 @@ name: Terraform Pipeline
 on:
   push:
     branches:
-      - main
+      - feature_branch
       - 'releases/**'
 jobs:
   Terraform-Fmt-Validate:
       runs-on: ubuntu-latest
+      permissions:
+        packages: write
+        contents: read
+        id-token: write
       steps:
-        - run: echo "Running Landing Zone Pipeline"
-
-        - name: Checkout
+        - name: git clome of my repo
           uses: actions/checkout@v3
         
         - name: AWS authentication
-          uses: aws-actions/configute-aws-credentials@v1
+          uses: aws-actions/configure-aws-credentials@v1
           with:
             role-to-assume: arn:aws:iam::342623272824:role/github-oidc
             aws-region: us-east-2
             role-session-name: GithubDeployment
-
+        
         - name: Setup Terraform
           uses: hashicorp/setup-terraform@v1
 
