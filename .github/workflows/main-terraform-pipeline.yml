@@ -2,7 +2,7 @@ name: Terraform Pipeline
 on:
   push:
     branches:
-      - feature_branch
+      - main
       - 'releases/**'
 jobs:
   Terraform-Fmt-Validate:
