@@ -1,0 +1,30 @@
+name: Terraform Pipeline
+on:
+  push:
+    branches:
+      - main
+      - 'releases/**'
+jobs:
+  Terraform-Fmt-Validate:
+      runs-on: ubuntu-latest
+      steps:
+        - run: echo "Running Landing Zone Pipeline"
+
+        - name: Checkout
+          uses: actions/checkout@v3
+
+        - name: Setup Terraform
+          uses: hashicorp/setup-terraform@v1
+
+        - name: Terraform Init
+          env:
+            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
+          run: terraform init
+
+        - name: Terraform Format
+          id: fmt
+          run: terraform fmt -check
+
+        - name: Terraform Validate
+          run: terraform validate
