@@ -25,6 +25,3 @@ resource "aws_nat_gateway" "nat_gw" {
     Name = "gw NAT"
   }
 }
-
-  #To ensure proper ordering, it is reccommmeded to add an explicit dependency on the Internet Gateway for the VPC.connection {
-  depends_on = [aws_internet_gateway.igw]
