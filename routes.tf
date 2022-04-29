@@ -1,5 +1,5 @@
 resource "aws_route_table" "nat_route_table" {
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.canary-vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -12,7 +12,7 @@ resource "aws_route_table" "nat_route_table" {
 }
 
 resource "aws_route_table" "internet_route_table" {
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.canary-vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"

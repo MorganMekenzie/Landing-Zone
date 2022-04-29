@@ -1,5 +1,5 @@
 # Creating the VPC
-resource "aws_vpc" "main" {
+resource "aws_vpc" "canary-vpc" {
   cidr_block = var.vpc_cidr
   tags = {
     Name = "${var.project_name}"
@@ -8,7 +8,7 @@ resource "aws_vpc" "main" {
 
 #Creating the internet gateway
 resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.canary-vpc.id
   tags = {
     Name = "${var.project_name}-igw"
   }
