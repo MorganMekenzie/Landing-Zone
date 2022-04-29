@@ -1,5 +1,5 @@
 resource "aws_subnet" "public_a" {
-  vpc_id                  = aws_vpc.main.id
+  vpc_id                  = aws_vpc.canary-vpc.id
   cidr_block              = var.public_a_cidr
   availability_zone       = "${var.region_name}a"
   map_public_ip_on_launch = true
@@ -10,7 +10,7 @@ resource "aws_subnet" "public_a" {
 }
 
 resource "aws_subnet" "public_b" {
-  vpc_id                  = aws_vpc.main.id
+  vpc_id                  = aws_vpc.canary-vpc.id
   cidr_block              = var.public_b_cidr
   availability_zone       = "${var.region_name}b"
   map_public_ip_on_launch = true
@@ -21,7 +21,7 @@ resource "aws_subnet" "public_b" {
 }
 
 resource "aws_subnet" "private_a" {
-  vpc_id            = aws_vpc.main.id
+  vpc_id            = aws_vpc.canary-vpc.id
   cidr_block        = var.private_a_cidr
   availability_zone = "${var.region_name}a"
 
@@ -31,7 +31,7 @@ resource "aws_subnet" "private_a" {
 }
 
 resource "aws_subnet" "private_b" {
-  vpc_id            = aws_vpc.main.id
+  vpc_id            = aws_vpc.canary-vpc.id
   cidr_block        = var.private_b_cidr
   availability_zone = "${var.region_name}b"
 
@@ -41,7 +41,7 @@ resource "aws_subnet" "private_b" {
 }
 
 resource "aws_subnet" "data_a" {
-  vpc_id            = aws_vpc.main.id
+  vpc_id            = aws_vpc.canary-vpc.id
   cidr_block        = var.data_a_cidr
   availability_zone = "${var.region_name}a"
 
@@ -51,7 +51,7 @@ resource "aws_subnet" "data_a" {
 }
 
 resource "aws_subnet" "data_b" {
-  vpc_id            = aws_vpc.main.id
+  vpc_id            = aws_vpc.canary-vpc.id
   cidr_block        = var.data_b_cidr
   availability_zone = "${var.region_name}b"
 
