@@ -1,0 +1,39 @@
+name: Terraform Pipeline
+on:
+  push:
+    branches:
+      - main
+      - 'releases/**'
+jobs:
+  Terraform-Fmt-Validate:
+      runs-on: ubuntu-latest
+      permissions:
+        packages: write
+        contents: read
+        id-token: write
+      steps:
+        - name: git clome of my repo
+          uses: actions/checkout@v3
+        
+        - name: AWS authentication
+          uses: aws-actions/configure-aws-credentials@v1
+          with:
+            role-to-assume: arn:aws:iam::342623272824:role/github-oidc
+            aws-region: us-east-2
+            role-session-name: GithubDeployment
+        
+        - name: Setup Terraform
+          uses: hashicorp/setup-terraform@v1
+
+        - name: Terraform Init
+          run: terraform init
+
+        - name: Terraform Format
+          id: fmt
+          run: terraform fmt 
+
+        - name: Terraform Validate
+          run: terraform validate
+        
+        - name: Terraform Apply
+          run: terraform apply -auto-approve
